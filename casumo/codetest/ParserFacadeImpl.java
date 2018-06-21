@@ -1,3 +1,5 @@
+package casumo.codetest;
+
 import java.io.*;
 import java.util.Optional;
 

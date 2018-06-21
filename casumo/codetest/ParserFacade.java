@@ -1,3 +1,5 @@
+package casumo.codetest;
+
 import java.io.File;
 
 public interface ParserFacade {
