@@ -16,12 +16,12 @@ class ParserFacadeImpl implements ParserFacade {
 
     private String genericGetContent(Predicate<Integer> predicate) throws IOException {
         FileInputStream i = new FileInputStream(file);
-        String output = "";
+        StringBuilder output = new StringBuilder();
         int data;
         while ((data = i.read()) > 0) if (predicate.test(data)) {
-            output += (char) data;
+            output.append((char) data);
         }
-        return output;
+        return output.toString();
     }
 
     public String getContent() throws IOException {
