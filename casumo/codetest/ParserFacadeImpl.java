@@ -31,7 +31,7 @@ class ParserFacadeImpl implements ParserFacade {
         return genericGetContent(data -> data < 0x80);
     }
     public void saveContent(String content) throws IOException {
-        FileOutputStream o = new FileOutputStream(file);
+        BufferedOutputStream o = new BufferedOutputStream(new FileOutputStream(file));
         for (int i = 0; i < content.length(); i += 1) {
             o.write(content.charAt(i));
         }
