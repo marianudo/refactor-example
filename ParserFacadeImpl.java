@@ -4,29 +4,12 @@ import java.util.Optional;
 /**
  * This class is thread safe.
  */
-public class ParserFacadeImpl implements ParserFacade {
+class ParserFacadeImpl implements ParserFacade {
 
-    private static ParserFacade instance;
+    private final File file;
 
-    public static ParserFacade getInstance() {
-        if (instance == null) {
-            instance = new ParserFacadeImpl();
-        }
-        return instance;
-    }
-
-    private File file;
-
-    public synchronized void setFile(File f) {
-        file = f;
-    }
-
-    public synchronized Optional<File> getFile() {
-        if (file != null) {
-            return Optional.of(file);
-        } else {
-            return null;
-        }
+    ParserFacadeImpl(final File file) {
+        this.file = file;
     }
 
     public String getContent() throws IOException {
