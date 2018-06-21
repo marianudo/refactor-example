@@ -15,7 +15,7 @@ class ParserFacadeImpl implements ParserFacade {
     }
 
     private String genericGetContent(Predicate<Integer> predicate) throws IOException {
-        FileInputStream i = new FileInputStream(file);
+        BufferedInputStream i = new BufferedInputStream(new FileInputStream(file));
         StringBuilder output = new StringBuilder();
         int data;
         while ((data = i.read()) > 0) if (predicate.test(data)) {
