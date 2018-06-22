@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 public interface ParserFacade {
-    default ParserFacade getInstance(File file) {
+    static ParserFacade getInstance(File file) {
         return new ParserFacadeImpl(file);
     }
 
