@@ -1,4 +1,4 @@
-package casumo.codetest;
+package parsermodule;
 
 import java.io.File;
 import java.io.IOException;
