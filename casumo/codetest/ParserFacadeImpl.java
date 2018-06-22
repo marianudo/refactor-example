@@ -14,11 +14,11 @@ class ParserFacadeImpl implements ParserFacade {
         this.file = file;
     }
 
-    private synchronized String genericGetContent(Predicate<Integer> predicate) throws IOException {
-        try (BufferedInputStream i = new BufferedInputStream(new FileInputStream(file))) {
+    private synchronized String genericGetContent(Predicate<Integer> includeReadData) throws IOException {
+        try (BufferedInputStream input = new BufferedInputStream(new FileInputStream(file))) {
             StringBuilder output = new StringBuilder();
             int data;
-            while ((data = i.read()) > 0) if (predicate.test(data)) {
+            while ((data = input.read()) > 0) if (includeReadData.test(data)) {
                 output.append((char) data);
             }
             return output.toString();
@@ -32,9 +32,9 @@ class ParserFacadeImpl implements ParserFacade {
         return genericGetContent(data -> data < 0x80);
     }
     public synchronized void saveContent(String content) throws IOException {
-        try (BufferedOutputStream o = new BufferedOutputStream(new FileOutputStream(file))) {
+        try (BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(file))) {
             for (int i = 0; i < content.length(); i += 1) {
-                o.write(content.charAt(i));
+                output.write(content.charAt(i));
             }
         }
     }
