@@ -14,7 +14,7 @@ class ParserFacadeImpl implements ParserFacade {
         this.file = file;
     }
 
-    private String genericGetContent(Predicate<Integer> predicate) throws IOException {
+    private synchronized String genericGetContent(Predicate<Integer> predicate) throws IOException {
         try (BufferedInputStream i = new BufferedInputStream(new FileInputStream(file))) {
             StringBuilder output = new StringBuilder();
             int data;
@@ -31,7 +31,7 @@ class ParserFacadeImpl implements ParserFacade {
     public String getContentWithoutUnicode() throws IOException {
         return genericGetContent(data -> data < 0x80);
     }
-    public void saveContent(String content) throws IOException {
+    public synchronized void saveContent(String content) throws IOException {
         try (BufferedOutputStream o = new BufferedOutputStream(new FileOutputStream(file))) {
             for (int i = 0; i < content.length(); i += 1) {
                 o.write(content.charAt(i));
